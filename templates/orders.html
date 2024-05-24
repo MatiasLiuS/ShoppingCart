@@ -1,0 +1,117 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="categories">
+    <div class="small_container">
+      <h2 class = "title"> Orders </h2>
+      <div class="row">
+        <div class="search-container">
+          <input type="text" placeholder="Search for an item" id="search-bar">
+          <button type="button" id="search-btn">Search</button>
+        </div>
+        <table id ="cart_table">
+        <tr>
+          <td colspan="3">
+            <a href="#" class="sort-btn" id="sort-by-date-asc-btn">Sort by Oldest</a>
+            <a href="#" class="sort-btn" id="sort-by-date-desc-btn">Sort by Latest</a>
+          </td>
+        </tr>
+          
+          <tr>
+          <th>Order ID</th>
+          <th>Order Date</th>
+          <th>Total Cost</th>
+        </tr>
+          {% for order in orders %}
+        <tr id="{{order['o_id'] }}_row">
+          <td>
+            <div class="cart_info">
+              <div> 
+                   <p>  {{  order['o_id']  }}</p>
+              </div>   
+          </td>
+          <td>
+                {{ order['o_date'] }}
+          </td>
+
+          <td>${{ order['total_cost'] }}</td>
+        </tr>    
+          {% endfor %}
+        </table>
+      </div>
+    </div>
+</div>
+
+<script>
+  // Get the table rows (excluding the header row)
+  const rows = Array.from(document.querySelectorAll("#cart_table tr:not(:first-child)"));
+
+  // Add a click event listener to the "Sort by Date (ascending)" button
+  const sortByDateAscBtn = document.getElementById("sort-by-date-asc-btn");
+  sortByDateAscBtn.addEventListener("click", () => {
+    // Sort the rows by the date in ascending order
+    rows.sort((rowA, rowB) => {
+      const dateA = new Date(rowA.children[1].textContent.trim());
+      const dateB = new Date(rowB.children[1].textContent.trim());
+      return dateA - dateB;
+    });
+
+    // Remove the existing rows from the table
+    rows.forEach(row => {
+      row.remove();
+    });
+
+    // Re-insert the sorted rows into the table
+    rows.forEach(row => {
+      document.querySelector("#cart_table").appendChild(row);
+    });
+  });
+
+  // Add a click event listener to the "Sort by Date (descending)" button
+  const sortByDateDescBtn = document.getElementById("sort-by-date-desc-btn");
+  sortByDateDescBtn.addEventListener("click", () => {
+    // Sort the rows by the date in descending order
+    rows.sort((rowA, rowB) => {
+      const dateA = new Date(rowA.children[1].textContent.trim());
+      const dateB = new Date(rowB.children[1].textContent.trim());
+      return dateB - dateA;
+    });
+
+    // Remove the existing rows from the table
+    rows.forEach(row => {
+      row.remove();
+    });
+
+    // Re-insert the sorted rows into the table
+    rows.forEach(row => {
+      document.querySelector("#cart_table").appendChild(row);
+    });
+  });
+</script>
+
+<script>
+  // Get the search bar and the search button
+const searchBar = document.getElementById("search-bar");
+const searchButton = document.getElementById("search-btn");
+
+// Get the table rows (excluding the header row)
+const rows = Array.from(document.querySelectorAll("#cart_table tr:not(:first-child)"));
+
+// Add a click event listener to the search button
+searchButton.addEventListener("click", () => {
+  // Get the user's search query
+  const query = searchBar.value.trim().toLowerCase();
+
+  // Filter the rows based on the item name and hide the rows that do not match the search query
+  rows.forEach(row => {
+    const itemName = row.querySelector("td:first-of-type p").textContent.trim().toLowerCase();
+    if (itemName.includes(query)) {
+      row.style.display = "";
+    } else {
+      row.style.display = "none";
+    }
+  });
+});
+
+</script>
+{% endblock %}

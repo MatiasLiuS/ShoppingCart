@@ -1,0 +1,367 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body{
+    font-family: 'Roboto Mono', monospace;
+}
+/***********************HEADER STARTS HERE***********************/
+.topbar{
+    display: flex; 
+    align-items: center;
+    padding: 20px;
+}
+nav{
+    flex: 1;
+    text-align: right;
+}
+nav ul{
+    display: inline-block;
+    list-style-type: none;
+}
+nav ul li{
+    display: inline-block;
+    margin-right: 20px;
+}
+a{
+    text-decoration:none;
+    color: #ffffff;
+}
+p{
+    color: #555;
+}
+.container{
+    max-width: 1200px;
+    margin: auto;
+    padding-left: 25px;
+    padding-right: 25px;
+}
+.row{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}
+.col_2{
+    flex-basis: 50%;
+    min-width: 300px;
+}
+.col_2 img{
+   max-width: 100%;
+   padding: 50px 0;
+}
+.col_2 h1{
+  font-size: 50px;
+  line-height: 60px;
+  margin: 25px 0;
+}
+.shop_btn{
+  display: inline-block;
+  background: #A020F0;
+  color: #fff;
+  padding: 8px 30px;
+  margin: 30px 0;
+  border-radius: 30px;
+  transition: background 0.5s; 
+}
+.shop_btn:hover{
+  background: #BFCC94; 
+}
+.cart_btn{
+  display: inline-block;
+  background: #387D7A;
+  padding: 8px 10px ;
+  margin: 10px 0;
+  border-radius: 10px;
+  transition: background 0.5s; 
+}
+.cart_btn:hover{
+  background: #BFCC94; 
+}
+.cart_btn placeover{
+   color: #fff;
+}
+.header{
+  background: radial-gradient(#fff, #A020F0);
+}
+.header .row{
+    margin-top: 70px;
+}
+.search_btn{
+  display: inline-block;
+  background: #387D7A;
+  padding: 8px 10px; */
+  margin: 10px 0;
+  border-block-color: #387D7A;
+  
+/*   border-radius: 10px; */
+  transition: background 0.5s; 
+}
+.search_btn:hover{
+  background: #BFCC94; 
+}
+.search-container{
+ padding-left: 10px;
+}
+.search-container input{
+
+}
+.welcome_btn{
+  display: inline-block;
+  background: #387D7A;
+  color: #fff;
+  padding: 8px 10px ;
+  margin: 10px 0;
+  border-radius: 10px;
+}
+/***********************HEADER ENDS HERE***********************/
+
+/***********************CATEGORIES STARTS HERE***********************/
+
+.categories{
+  margin: 70px 0;
+}
+.title{
+  text-align: center;
+  margin:0 auto 80px;
+  position: relative;
+  line-height: 60px;
+  color: #5b5b5b;
+}
+.title::after{
+  content:'';
+  background: #A020F0;
+  width: 80px;
+  height: 5px;
+  border-radius: 5px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+}
+.subtitle{
+  text-align: center;
+  margin:0 auto 80px;
+  position: relative;
+  line-height: 60px;
+  color: #5b5b5b;
+}
+.col_3{
+    flex-basis: 25%;
+    padding: 10px;
+    min-width: 200px;
+    margin-bottom: 50px;
+    transition: transform 0.5s;
+    text-align: center;
+}
+.col_3 img{
+    width: 100%;
+}
+.col_3:hover{
+  transform: translateY(-5px);
+}
+.small_container{
+  max-width: 1080px;
+  margin: auto;
+  padding-left: 25px;
+  padding-right: 25px;
+}
+
+/***********************CATEGORIES ENDS HERE***********************/
+
+/***********************FOOTER STARTS HERE***********************/
+.footer{
+  background: #000000;
+  color: #8a8a8a;
+  font-size: 14px;
+  padding: 60px 0 20px
+}
+.footer p{
+ color: #8a8a8a;
+}
+.footer h3{
+ color: #ffffff;
+  margin-bottom: 20px;
+}
+.footer_col_1, .footer_col_2, .footer_col_3, .footer_col_4{
+  min-width: 250px;
+  margin-bottom: 20px;
+} 
+.footer_col_1{
+  flex-basis: 30%;
+}
+.footer_col_2{
+  flex-basis: 1;
+  text-align: center;
+}
+.footer_col_2 img{
+  width: 180px;
+  margin-bottom: 20px;
+}
+.footer_col_3, .footer_col_4{
+  flex-basis: 12%;
+  text-align: center;
+}
+ul{
+  list-style-type: none;
+}
+.app_logo{
+  margin-top: 20px;
+}
+.app_logo img{
+  width: 140px;
+}
+.footer hr{
+  border: none;
+  bachground: #b5b5b5;
+  height: 1px;
+  margin: 20px 0;
+}
+.copyright{
+  text-align: center;
+}
+/***********************FOOTER ENDS HERE***********************/
+
+/***********************SINGE PRODUCT STARTS HERE***********************/
+.single_product{
+  margin-top: 80px;
+}
+.single_product .col_2 img{
+  padding:0 ;
+}
+.single_product .col_2 {
+  padding:20px ;
+}
+.single_product h4, h5{
+  margin: 20px 0;
+  font-size: 24px;
+  font-weight: bold;
+}
+.single_product input{
+  width: 50px;
+  height: 40px;
+  padding-left: 10px;
+  font-size: 20px;
+  margin-right: 10px;
+  border: 1px solid #A020F0
+}
+input:focus{
+  outline: none;
+}
+/***********************SINGE PRODUCT ENDS HERE***********************/
+
+/***********************CART ITEMS STARTS HERE***********************/
+.cart_page{
+  margin: 80px auto;
+}
+table{
+  width: 100%;
+  border-collapse: collapse;
+}
+.cart_info{
+  display: flex;
+  flex-wrap: wrap;
+}
+th{
+  text-align: left;
+  padding: 5px;
+  color: #fff;
+  background: #A020F0;
+  font-weight: normal;
+}
+
+td{
+  padding: 10px 5px;
+}
+td input{
+  width: 40px;
+  height: 30px;
+  padding: 5px;
+}
+td a{
+  color: #A020F0;
+  font-size: 12px;
+}
+td img{
+  width: 80px;
+  height: 80px;
+  margin-right: 10px;
+}
+.total_price {
+  display: flex;
+  justify-content: flex-end;
+  margin-left: auto;
+}
+.total_price table{
+  border-top: 3px solid #A020F0;
+  width: 100%;
+  max-width: 350px;
+}
+td:last-child{
+  text-align: right;
+}
+th:last-child{
+  text-align: right;
+}
+/***********************CART ITEMS ENDS HERE***********************/
+
+.empty_btn{
+  display: inline-block;
+  background: none;
+  color: #A020F0;
+  border: none;
+  transition: background 0.5s; 
+}
+.empty_btn:hover{
+  color: #BFCC94; 
+}
+
+order_table{
+  
+}
+
+
+/* Dropdown Button */
+.dropbtn {
+  background-color: #04AA6D;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+/* The container <div> - needed to position the dropdown content */
+.dropdown {
+  color: #ffff;
+  position: relative;
+  display: inline-block;
+}
+
+/* Dropdown Content (Hidden by Default) */
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+/* Links inside the dropdown */
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+/* Change color of dropdown links on hover */
+.dropdown-content a:hover {background-color: #ddd;}
+
+/* Show the dropdown menu on hover */
+.dropdown:hover .dropdown-content {display: block;}
+
+/* Change the background color of the dropdown button when the dropdown content is shown */
+.dropdown:hover .dropbtn {background-color: #3e8e41;}

@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+<!--------------------  LOGIN SECTION ENDS HERE  --------------------->
+{% block content %}
+ <div class="account_page">
+   <div class="container">
+     <div class="row">
+       <div class="col_2">
+         <img src="{{url_for('static', filename='images/fnh/img1.jpg')}}" width=100%>
+       </div>
+       
+       <div class="col_2">
+        <div class="form_acontainer">
+            <div class="form_btn">
+              <span onclick="login()">Register</span>
+              <span onclick="register()">Login</span>
+              <hr id="Indicator">
+            </div>
+<!--  LOGIN START HERE-->
+          <form id="RegForm"  method="POST" action="{{ url_for('login') }}">
+             <input type="text" name="username" placeholder="Username" required>
+             <input type="password" name="password" placeholder="Password" required>
+             {% if error_message %}
+               <p class="error">{{ error_message }}</p>
+            {% endif %}
+            <h>        </h>
+            <button type="submit" class="cart_btn"> Log in</button>
+          </form>
+<!--  LOGIN START HERE-->
+
+          <form id="LoginForm" method="POST" action="/register">
+            <input type="text" name="name" placeholder="Name">
+            <input type="text" name="username" placeholder="Username">
+            <input type="text" name="password" placeholder="Password">
+              {% if err_message %}
+               <p class="error">{{ err_message }}</p>
+            {% endif %}
+            <button type="submit" class="cart_btn">Register</button>
+          </form>
+        </div>
+       </div>
+     </div>
+   </div>
+ </div> 
+<!--------------------  LOGIN SECTION STARS HERE  --------------------->
+<!--------------------  JS TOGGLE FORM STARTS HERE  --------------------->
+<script>
+var LoginForm = document.getElementById("LoginForm");
+var RegForm = document.getElementById("RegForm");
+var Indicator = document.getElementById("Indicator");
+  
+function register(){
+  RegForm.style.transform = "translateX(0px)";
+  LoginForm.style.transform = "translateX(0px)";
+  Indicator.style.transform = "translateX(100px)";
+}
+  
+function login(){
+  RegForm.style.transform = "translateX(300px)";
+  LoginForm.style.transform = "translateX(300px)";
+  Indicator.style.transform = "translateX(0px)";
+}
+  
+</script>
+{% endblock %}

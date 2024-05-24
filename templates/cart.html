@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+<!--------------------  CART SECTION STARTS HERE  --------------------->
+{% block content %}
+  <div class="categories">
+    <div class="small_container cart_page"> 
+      <h2 class = "title"> Your Cart </h2>
+      <div class="row">
+        <table id ="cart_table"> 
+<tr>
+  <td colspan="3">
+    <form id="empty-cart-form" method="POST">
+  <input type="hidden" name="action" value="empty_cart">
+</form>
+
+<a href="#" class="empty_btn" onclick="document.getElementById('empty-cart-form').submit();">Empty Cart</a>
+    <a href="/cart" class="empty_btn"> Update Cart</a>
+  </td>
+</tr>
+
+          
+{% if 'cart' in session %}
+         <tr>
+          <th>Product</th>
+          <th>Quantity</th>
+          <th>Subtotal</th>
+        </tr>
+          
+      
+<!--Individual Product Start -->
+<!-- Product 1 -->
+      {% for product_id, quantity in session['cart'].items() %}
+        {% set product = get_product_by_id(product_id) %}
+        <tr id="{{product_id }}_row">
+          <td>
+            <div class="cart_info">
+              <img src="{{ url_for('static', filename=product.p_image) }}">
+              <div> 
+                   <p>  {{ product.p_name }}</p>
+                  <small>Price: ${{ product.p_price }}</small>
+                  <br>
+                 <form action="{{ url_for('remove') }}" method="POST">
+                    <input type="hidden" name="product_id" value="{{ product_id }}"/>
+                    <button type="submit" class="empty_btn" name="action" value="delete">Remove Item</button>
+       </form>
+              </div>   
+            </div>
+          </td>
+          <td>
+                 <form onsubmit="UpdateQuantity(event)">
+                  <input type="hidden" name="product_id" value="{{ product_id }}">
+                  <input type="number" name="quantity" id="quantity" value="{{quantity}}" min="1" max="{{ product.p_inventory }}"       onkeydown="if(event.keyCode < 37 || event.keyCode > 40) event.preventDefault();">
+                  <button type="submit" class="empty_btn" >Save Quantity</button>
+                
+                </form> 
+          </td>
+
+          <td>{{ product.p_price * quantity }}</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+{% else %}
+  <p>Your cart is empty.</p>
+{% endif %}
+
+<!--Individual Product End -->
+          
+        </table>
+<!--Total Price  Start --> 
+        <div class="total_price">
+        <table>
+          <tr>
+            <td>Subtotal</td>
+            <td id="total_subtotal">${{ subtotal }}</td>
+          </tr>
+          <tr>
+            <td>Tax</td>
+            <td id="total_tax">${{ tax }}</td>
+          </tr>
+          <tr>
+            <td>Total</td>
+            <td id="total_total">${{ total }}</td>
+          </tr>
+          <tr>
+          <td colspan="3"><a href="/checkout" class="shop_btn">Checkout</a></td>
+                    
+        </tr>
+        </table>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+
+<!--------------------  CART SECTION ENDS HERE  --------------------->
+<script>
+  function UpdateQuantity(event) {
+  event.preventDefault();
+  const form = event.target;
+  const formData = new FormData(form);
+  const url = '/update-quantity';
+
+  fetch(url, {
+    method: 'POST',
+    body: formData
+  })
+}
+
+const subtotalElement = document.getElementById("cart-subtotal");
+subtotalElement.innerHTML = "$" + newSubtotal; // assuming newSubtotal is a variable containing the updated subtotal
+
+
+function removeProduct(productId, quantity) {
+  $.ajax({
+    url: "/remove-product",
+    type: "POST",
+    data: {
+      product_id: productId,
+      quantity: quantity
+    },
+    success: function(data) {
+      // Remove the product from the UI
+      // ...
+    }
+  });
+}
+
+</script>
+
+{% endblock%}

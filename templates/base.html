@@ -1,0 +1,109 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head> 
+    <meta charset="UTF-8">
+    <title>MLSJewels</title>
+  <link rel="stylesheet" href="/static/style_login.css">
+  <link rel="stylesheet" href="/static/style_home.css">
+  <link rel="stylesheet" href="/static/style_catalog.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@200;300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+  
+<!--------------------  HEADER SECTION STARTS HERE  --------------------->
+
+  <div class="header">
+  <div class="container">
+    <div class="topbar">
+        <div class="logo">
+          <img src= "{{url_for('static', filename='images/fnh/logo.png')}}" width="125px">
+        </div>
+      <nav>
+        <ul>
+          <li><a href="/" class="cart_btn"> Home </a></li>
+          <li><a href="/collections/all" class="cart_btn"> Products </a></li>
+          <div class="dropdown">
+            <button class="cart_btn">Categories</button>
+            <div class="dropdown-content">
+              <a href="/collections/Necklaces">Necklaces</a>
+              <a href="/collections/Rings">Rings</a>
+              <a href="/collections/Earrings">Earrings</a>
+            </div>
+          </div>
+      {%if session['username']%}
+             <li class="welcome_btn">Welcome {{ session['username'] }}</li>
+            <li><a href="{{url_for('logout')}}" class="cart_btn"> Log out</a></li>
+            <li><a href="/orders" class="cart_btn"> Orders </a></li>
+        {%else%}
+           <li><a href="{{url_for('login')}}" class="cart_btn"> Log in</a></li>
+        {% endif %}
+        </ul>
+      </nav>
+<!--       
+      <a href="/login" class="cart_btn"> <img src="{{url_for('static', filename='images/fnh/account.png')}}" width="30px" height="30px"></a> -->
+       {%if session['username']%}
+        <div class="search-container">
+        <a href="/cart" class="cart_btn"> <img src="{{url_for('static', filename='images/fnh/cart.png')}}" width="30px" height="30px"></a>
+        </div>
+        {% endif %}
+<!--     SEARCHBAR   -->
+  <div class="search-container">
+  <form action="{{ url_for('search') }}" method="get">
+   <input type="text" placeholder="Search..." name="search" style="width: 150px; height: 30px;">
+    <button type="submit"><i class="search_btn"> <img src="{{url_for('static', filename='images/fnh/search.png')}}" width="10px" height="10px"></i></button>
+  </form>
+</div>
+<!-- SEARCH BAR  -->
+    </div>
+   
+  </div>
+</div>
+<!--------------------  HEADER SECTION ENDS HERE  --------------------->
+<!-- Where stuff goes -->
+    {% block content %}{% endblock %}
+<!-- Where stuff goes  -->
+<!--------------------  FOOTER SECTION STARS HERE  --------------------->
+  <div class="footer">
+    <div class="container">
+      <div class="row">
+        <div class="footer_col_1">
+          <h3> Download Our App</h3>
+          <p> Download App for Android and iOS.</p>
+          <div class="app_logo">
+            <img src="{{url_for('static', filename= 'images/fnh/play-store.png')}}">
+             <img src="{{url_for('static', filename= 'images/fnh/app-store.png')}}">
+          </div>
+        </div>
+        <div class="footer_col_2">
+          <img src="{{url_for('static', filename='images/fnh/logo-white.png')}}">
+          <p> Keep slaying you slayboss.</p>
+        </div>
+        <div class="footer_col_3">
+          <h3> Useful links</h3>
+          <ul>
+            <li>Coupons</li>
+            <li>Blog Post</li>
+            <li>Return Policy</li>
+            <li>Join Affiliate</li>
+          </ul>
+        </div>
+        <div class="footer_col_4">
+          <h3> Follow us</h3>
+          <ul>
+            <li>Twitter</li>
+            <li>Instagram</li>
+            <li>TikTok</li>
+            <li>Snapchat</li>
+          </ul>
+        </div>
+        <hr>
+        <p class="copyright"> Copyright 2023 - Matias Liu Schmid</p>
+      </div>
+    </div>
+  </div>
+<!--------------------  FOOTER SECTION ENDS HERE  --------------------->
+
+</body>
+</html>

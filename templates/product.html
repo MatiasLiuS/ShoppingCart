@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+<!-- ------------------  SINGLE PRODUCT SECTION STARTS HERE  -------------------->
+{% block content %}
+  <div class="small_container single_product">
+    <div class="row">
+      <!-- This is beginning of product -->
+    {% for row in producto %}
+      <div class="col_2">
+         <img src="{{ url_for('static', filename=row['p_image']) }}">
+      </div>
+      <div class="col_2">
+        <p>Collection / {{row['category']}} </p>
+        <h1>{{ row['p_name'] }} </h1>
+        <h4>${{ row['p_price'] }}.00 USD</h4>
+        <h5> Stock: {{row['p_inventory']}}</h5>
+
+        <!-- ADD PRODUCT TO CART STARTS HERE -->
+        {%if session['username']%}
+        <form onsubmit="addToCart(event); resetQuantity();">
+          <input type="hidden" name="product_id" value="{{ row['p_id'] }}">
+          <input type="number" name="quantity" id="quantity" value="1" min="1" max="{{ row['p_inventory'] }}">
+          <button type="submit" class="shop_btn">Add To Cart</button>
+        </form> 
+<!--         {% with messages = get_flashed_messages() %}
+          {% if messages %}
+            <ul class="flashes">
+              {% for message in messages %}
+                <li>{{ message }}</li>
+              {% endfor %}
+            </ul>
+          {% endif %} -->
+        {% endwith %}
+        {%else%}
+           <p> Log In to Add to Cart</p>
+          <a href="{{url_for('login')}}" class="shop_btn"> Log In</a></li>
+        {% endif %}
+        <!-- ADD PRODUCT TO CART ENDS HERE -->
+        
+        <h3> Product Details:</h3>
+        <p> {{ row['p_desc'] }}</p>
+      </div>
+    {% endfor %}  
+      <!-- This is end of product -->
+  </div>
+    </div>
+
+<script>
+  function addToCart(event) {
+  event.preventDefault(); // prevent the form from reloading the page
+  const form = event.target; // get the form element
+  const formData = new FormData(form); // create a new FormData object from the form
+  const url = '/add-to-cart'; // set the URL to the server endpoint that handles adding items to the cart
+
+  fetch(url, {
+    method: 'POST',
+    body: formData // pass the FormData object as the request body
+  })
+  .then(response => response.json())
+  .then(data => {
+    console.log('Item added to cart:', data); // log the response data to the console
+    // TODO: update the cart display with the new item(s)
+  })
+  .catch(error => {
+    console.error('Error adding item to cart:', error); // log any errors to the console
+  });
+}
+</script>
+
+<script>
+function resetQuantity() {
+  document.getElementById("quantity").value = 1;
+}
+</script>
+
+{% endblock %}
+<!--------------------  SINGLE SECTION ENDS HERE  ------------------- -->

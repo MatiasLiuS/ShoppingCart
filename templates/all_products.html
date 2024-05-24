@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+<!--------------------  CATALOG SECTION STARTS HERE  -------------------->
+{% block content %}
+  <div class="categories">
+    <div class="small_container">
+      
+      <h2 class = "title">Products</h2>
+      <div class="row">
+<!-- This is beginning of product -->
+         {% for product in products %}
+        <div class="col_3">
+           <a href="/product/{{product['p_id']}}"> <img src="{{ url_for('static', filename=product['p_image']) }}">
+             </a>
+          <h4> {{product['p_name']}} </h4>
+          <p>  ${{product['p_price']}}.00 USD </p>
+        </div>
+         {%endfor%} 
+<!-- This is end of product -->
+      </div>
+    </div>
+  </div>
+{% endblock %}
+<!--------------------  CATALOG SECTION ENDS HERE  --------------------->
